@@ -1,8 +1,4 @@
 # Vlnková transformace
-## Analýza signálů I
-### Michal Huptych
-#### ZS 2023/2024
-#### 19. 12. 2023
 
 ## Signál v časové doméně
 - Signál měřený v čase
@@ -17,7 +13,7 @@
 ## Signál ve frekvenční doméně
 - Základní metoda je Fourierova transformace
 - Převod z čistě časové oblasti do čistě frekvenční oblasti
-- Rozložení na frekvenční složky reprezentované bazí (sin, cos)
+- Rozložení na frekvenční složky reprezentované bází (sin, cos)
 - Signál ve frekvenční oblasti je komplexní signál
 - Rozklad probíhá z 1D do 2D prostoru (frekvence, reálná, imaginární složka) – my však zobrazujeme mod – tedy opět 1D signál
 

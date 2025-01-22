@@ -1,120 +1,102 @@
 # Digitální filtrace
-## Analýza signálů I
-### Michal Huptych
-#### ZS 2023/2024
-#### 5. 12. 2023
-
-## Přehled literatury
-- **Knihy a skripta**
-  - Robert Vích, Zdeněk Smékal: *Číslicové filtry*, Academia, 2000
-  - Vratislav Davídek, Miloš Laipert, Miroslav Vlček: *Analogové a číslicové filtry*, Vydavatelství ČVUT, 2000
-  - Mohamed Najim: *Digital Filters Design for Signal and Image Processing*, Wiley-ISTE, 2006
 
 ## Zesílení a útlum
 - Zesílení
   - Proces zvětšení amplitudy signálu (napěťové, proudové, atd.)
   - Udáváno buď bezrozměrně nebo v dB
-  - Příklad vzorce pro zesílení: 
-    ```
-    A_U = U_výstupní / U_vstupní - ; A_U = 20*log(U_výstupní / U_vstupní) [dB]
-    ```
+- Útlum
+  - Útlum vyjadřuje míru ztráty signálu (v dB) při jeho šíření médii, např. kabelem nebo vzduchem
 - dB
   - Původně útlumu telefonního vedení, akustika
-  - Logaritmická stupnice (podle vnímání sluchu)
-  - Není jednotkou v rámci SI
-  - Častokrát spojení 3 dB zesílení, resp. 3 dB útlum
+  - Logaritmická stupnice , umožňuje to snadnější práci s velmi velkými nebo malými čísly.
 
 ## LTI systémy
-- Lineární časově invariantní systémy
-  - Daný vstupní signál x(t) způsobí na výstupu odezvu y(t)
-  - Linearita: platí princip superpozice x1(t) + x2(t) = y1(t) + y2(t) 
-  - Časová invariantost: platí x(t-t0) → y(t-t0)
+- Lineární časově invariantní systémy : Systém je lineární, pokud splňuje princip superpozice, což znamená, že odpověď na lineární kombinaci vstupů je rovna stejné lineární kombinaci odpovědí na tyto vstupy.
+- Časová invariantost: Systém je časově invariantní, pokud posunutí vstupního signálu v čase způsobí stejný posun v odpovědi systému.  
 - Předpoklady
-  - Kauzalita
-  - Stabilita
+  - Kauzalita: Systém je kauzální, pokud jeho výstup v jakémkoli časovém okamžiku závisí pouze na hodnotách vstupu do tohoto okamžiku nebo dříve. (Nezávisí na budoucích)
+  - Stabilita: Systém je stabilní, pokud je výstup systému omezen pro každý omezený vstup.
+- Impulzní odezva: je odezva systému na Diracovu delta funkci
 
 ## Konvoluce
-- Základní předpis
-  - Kauzalita: h(t) = 0 pro t<0
-  - Stabilita: h(t) → 0 pro t → ∞
-- Matematické vlastnosti
-  - Komutativní: a*b = b*a
-  - Asociativní: (a*b)*c = a*(b*c)
-  - Distributivní: a*b + a*c = a*(b + c)
-- Popis systému
-  - Diferenční rovnice
-  - Impulsní odezva (LTI systémy)
-  - Odezva na Dirakův impuls (jednotkový skok)
+Jednoduše řečeno, konvoluce je proces, při kterém se kombinuje jeden signál s jiným, aby se vytvořil třetí signál.
 
-## Kauzalita a stabilita
-- Kauzalita
-  - y(n) + y(n-1)+ … + y(n-N) = x(n+M) - kazální pro M ≤ 0
-- Asymptotická definice stability
-  - Vlastní čísla systému definovaná algebraickou rovnicí det(λI − A) = 0 leží uvnitř jednotkové kružnice
+### Vlastnosti
+Komutativnost: Pořadí vstupů neovlivní výstup  
+Asociativnost: Možnost seskupení více konvolucí bez změny výsledku  
+Distibutivnost: Možnost roznásobení jednoho čísla součtem nebo rozdílem dvou dalších čísel
 
 ## Fourierova transformace
 - Základním matematickým aparátem pro převod z časové oblasti do frekvenční je Fourierova transformace
-- Vztah ke konvoluci
-  - S(ω) = ∫ s(t) e−jωt dt = s(t) ⋅ cos( ωt) − j ⋅ sin( ωt)
-  - X(ω) = ∫ x(t) e−jωt dt; H(ω) = ∫ h(t) e−jωt dt
-  - Y(ω) = X(ω) H(ω)
-  - y(t) = (1/2π) ∫ Y(ω) ejωt dω
 
 ## Artefakty
 - Část záznamu (biosignálu či obrazového signálu), která nemá fyziologický původ ve vyšetřovaném orgánu
-- technické artefakty - především při zpracování bioelektrických signálů
-- elektrostatické potenciály, rušení elektrorozvodnou sítí, impulsní rušivé signály, rušivá elektromagnetická pole, šum elektronických prvků a obvodů
+- technické artefakty - především při zpracování bioelektrických signálů (elektrická síť)
+- Biologické artefakty - Pohybové artefakty, vzájemným vlivem různých orgánů
 
 ## Filtrace
 - Filtrace = rozdělení signálu na základě jeho frekvenčních složek na propustné a nepropustné pásmo
 - Systém implementující funkci filtrace se nazývá filtr
-- Filtrace je jednou z nejpoužívanějších operací v signálovém zpracování
 - Za jistých podmínek je filtrace procesem, která propouští dané frekvenční pásmo s minimálními deformacemi
 
 ## Typy filtrů
-- Podle funkce
-  - dolní propust (DP)
-  - horní propust (HP)
-  - pásmová propust (PP)
-  - pásmová zádrž (PZ)
-- Podle impulzové odezvy
-  - FIR filtry (finite impulse response)
-  - IIR filtry (infinite impulse response)
-- Podle typu zpracování
-  - analogové filtry (odpor, kondenzátor, cívka)
-  - číslicové filtry (signálové procesory, PC)
+- Podle funkce (pozor tady v těch fotkách se jedná o útlum takže jsou tam znázorněné frekvence které jsou odfiltrované)
+  - dolní propust (DP)  
+    - ![dp](imgs/dp.PNG)  
+  - horní propust (HP)   
+    - ![hp](imgs/hp.PNG)
+  - pásmová propust (PP)  
+    - ![pp](imgs/propust.PNG)
+  - pásmová zádrž (PZ)  
+    - ![pz](imgs/zadrz.PNG)
+
+### Podle impulsové odezvy
+
+#### Filtry typu IIR
+- Filtry typu IIR (Infinite Impulse Response) jsou digitální filtry s nekonečnou impulsní odezvou.
+- Fáze: Tyto filtry nemají lineární fázi, což může vést ke změnám ve tvaru signálu při průchodu filtrem
+- Skupinové zpoždění: Není konzistentní pro všechny frekvenční složky, což může způsobit fázové zkreslení.
+- Podmínky pro stabilitu filtrů zahrnují, že všechny póly systému musí ležet uvnitř jednotkové kružnice v z-rovině.
+
+#### Filtry typu FIR
+- Filtry typu FIR (Finite Impulse Response) jsou digitální filtry s konečnou impulsní odezvou.
+- Fáze: Filtry typu FIR mohou dosáhnout lineární fáze, což znamená konstantní skupinové zpoždění pro všechny frekvenční složky, což je klíčové pro aplikace, kde je důležitá přesnost fázové charakteristiky signálu.
+- Stabilita: FIR filtry jsou vždy stabilní, což je zásadní výhoda oproti IIR filtrům.
+
+#### Souhrn pro FIR a IIR filtry
+![iir_vs_fir](imgs/IIR%20vs%20FIR.PNG)
+
+### Podle typu zpracování
+- analogové filtry (odpor, kondenzátor, cívka)
+- číslicové filtry (signálové procesory, PC)
 
 ## Adaptivní filtrace
 - Potřeba reagovat na změny rušení
-- Základní uspořádání
 - Adaptace
   - Nejčastěji LMS (Least Mean Square) algoritmus
   - Lineární filtr
   - V praxi většinou lineární filtr typu FIR (možno ale i IIR)
 
 ## Adaptivní filtrace - LMS
-- Gradietní prohledávání
-  - Důležitý je vztah mezi chybovým signálem 𝜖k a koeficienty filtru
-  - Střední kvadratické odchylky chybového signálu 𝜖k má kvadratickou závislost na koeficientech filtru
+- Gradientní prohledávání
+  - Důležitý je vztah mezi chybovým signálem a koeficienty filtru
+  - Střední kvadratické odchylky chybového signálu má kvadratickou závislost na koeficientech filtru
   - Tedy můžeme pro střední hodnotu chybového signálu hledat globální minimum, které nám určuje optimální hodnotu koeficientu filtru
 
 ## Filtrace - příklady
 - Příklady filtrace síťového brumu
-- Odstranění tzv. baseline wandering
+- Odstranění tzv. baseline wandering (to že to nemám například ekg v jedné rovině ale lítá mi to nahoru a dolů)
 - Vyhlazení signálu
 - Ukázky využití adaptivní filtrace pro EKG
-- Síťové rušení 50 Hz
-  - Notch filtr
-  - Q = 35
-  - f0 = 50 ± 0.71 Hz
-- Odstranění pohybu izolinie
-  - IIR filtr typu DP a 2. řádu
-  - f_0 = 0.5Hz
-  - filtrace s nulovou fází
-- Vyhlazení
-  - filtr Savitzky-golay
-  - Šířka okna: 23
-  - Řád polynomu: 11
+### Síťové rušení 50 Hz
+- Notch filtr
+
+### Odstranění pohybu izolinie
+- IIR filtr typu DP a 2. řádu
+
+### Vyhlazení
+- filtr Savitzky-golay
+
 
 ## Využití ICA
 - Numerická metoda separace signálů
