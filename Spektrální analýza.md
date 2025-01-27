@@ -14,8 +14,8 @@ Fourierova transformace je základním nástrojem pro lineární zpracování si
 
 
 ## Fourierovy řady
-**Harmonická analýza**: Libovolnou periodickou funkci lze rozložit na elementární harmonické složky (sin, coss)  
-**Kmitočtová syntéza** Kombinací harmonických složek lze vytvořit libovolnou periodickou funkci.
+**Harmonická analýza:** Libovolnou periodickou funkci lze rozložit na elementární harmonické složky (sin, coss)  
+**Kmitočtová syntéza:** Kombinací harmonických složek lze vytvořit libovolnou periodickou funkci.
 
 ### Sudé a liché funkce
 **Sudá**: Sudá funkce je symetrická podle osy `y`  
@@ -32,8 +32,9 @@ Polární tvar je jen jiný způsob vyjádření stejných informací jako trigo
 ### Komplexní (exponenciální) tvar
 Tento tvar používá komplexní exponenciály místo sinus a kosinus, což činí výpočty často jednoduššími, zvláště v kontextu digitálního zpracování signálu
 
-### Spojitý případ a Fourierova transformace
-fourierova transformace rozšiřuje koncept Fourierových hřad na neperiodické funkce, umožnující analyzovat jakýkoliv spojitý signál tím, že jej převede z časové doméno do frekvenční domény
+# Fourierova transformace
+### Spojitý případ
+fourierova transformace rozšiřuje koncept Fourierových řad na neperiodické funkce, umožnující analyzovat jakýkoliv spojitý signál tím, že jej převede z časové doméno do frekvenční domény
 
 ### Inverzní Fourierova transformace
 Inverzní Fourierova transformace umožňuje převést data zpět z frekvenční domény do časové domény. 
